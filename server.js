@@ -1,12 +1,20 @@
 require("dotenv").config();
 const app = require("./app");
 const mongoose = require("mongoose");
+const cloudinary = require("cloudinary");
 
 // Handle Uncaught exceptions
 process.on("uncaughtException", (err) => {
   console.log(`ERROR: ${err.stack}`);
   console.log("Shutting down server due to uncaught exception");
   process.exit(1);
+});
+
+// Setting up cloudinary config
+cloudinary.config({
+  cloud_name: process.env.CLOUDINARY_CLOUDNAME_NAME,
+  api_key: process.env.CLOUDINARY_API_KEY,
+  api_secret: process.env.CLOUDINARY_API_SECRET,
 });
 
 // config db
