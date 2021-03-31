@@ -1,3 +1,4 @@
+require("dotenv").config();
 const express = require("express");
 const app = express();
 
@@ -18,13 +19,15 @@ app.use(fileUpload());
 const products = require("./routes/product");
 const user = require("./routes/user");
 const order = require("./routes/order");
+const payment = require("./routes/payment");
 
-app.get("/", (req, res) => {
-  res.send("Hello");
-});
+// app.get("/", (req, res) => {
+//   res.send("Hello");
+// });
 app.use("/api", products);
 app.use("/api", user);
 app.use("/api", order);
+app.use("/api", payment);
 // Middleware to handle errors
 app.use(errorMiddleware);
 
