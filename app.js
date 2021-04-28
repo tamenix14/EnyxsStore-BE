@@ -28,13 +28,6 @@ app.use("/api", user);
 app.use("/api", order);
 app.use("/api", payment);
 
-if (process.env.NODE_ENV !== "PRODUCTION") {
-  app.use(express.static(path.join(__dirname + '/dist/public')));
-
-  app.get("*", (req, res) => {
-    res.sendFile(path.resolve(__dirname + '/dist/public/index.html'));
-  });
-}
 
 // Braintree
 app.use("/api", braintree);
