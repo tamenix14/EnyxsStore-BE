@@ -10,7 +10,7 @@ const productSchema = new mongoose.Schema({
   price: {
     type: Number,
     required: [true, "Please enter product price"],
-    maxLength: [5, "Product price cannot exceed 5 characters"],
+    maxlength: [5, "Product price cannot exceed 5 characters"],
     default: 0.0,
   },
   description: {
@@ -38,13 +38,9 @@ const productSchema = new mongoose.Schema({
     required: [true, "Please select category for this product"],
     enum: {
       values: [
-        "Cleats",
-        "Gloves",
-        "Balls",
-        "Shirts",
-        "Accessories",
-        "Bags & Luggage",
-        "Electronics",
+        "Phone",
+        "Smart watch",
+        "Headphone",
       ],
       message: "Please select correct category for product",
     },
@@ -58,14 +54,14 @@ const productSchema = new mongoose.Schema({
     required: [true, "Please select brand for this product"],
     enum: {
       values: [
-        "Nike",
-        "Adidas",
-        "Mizuno",
-        "Puma",
-        "New Balance",
-        "Umbro",
-        "Polar",
-        "COROS",
+        "Apple",
+        "Asus",
+        "Samsung",
+        "Nokia",
+        "Xiaomi",
+        "Oppo",
+        "Vsmart",
+        "Huawei",
       ],
       message: "Please select correct brand for product",
     },
@@ -80,6 +76,45 @@ const productSchema = new mongoose.Schema({
     maxLength: [5, "Product stock cannot exceed 5 characters"],
     default: 0,
   },
+  // Technical specifications
+  screensize: {
+    type: String,
+    required: [true, "Please enter Screen size"],
+  },
+  screentechnology: {
+    type: String,
+    required: [true, "Please enter Screen Technology"],
+  },
+  ramcapacity: {
+    type: String,
+    required: [true, "Please enter Ram Capacity"],
+  },
+  internalmemory: {
+    type: String,
+    required: [true, "Please enter Internal Memory"],
+  },
+  battery: {
+    type: String,
+    required: [true, "Please enter Battery"],
+  },
+  operatingsystem: {
+    type: String,
+    required: [true, "Please enter Operating System"],
+  },
+  material: {
+    type: String,
+    required: [true, "Please select material for this product"],
+    enum: {
+      values: [
+        "Plastic",
+        "Metal",
+        "Glass",
+      ],
+      message: "Please select correct material for product",
+    },
+  },
+
+
   numOfReviews: {
     type: Number,
     default: 0,

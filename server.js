@@ -1,4 +1,4 @@
-require("dotenv").config();
+if(process.env.NODE_ENV !== 'PRODUCTION') require("dotenv").config();
 const app = require("./app");
 const mongoose = require("mongoose");
 const cloudinary = require("cloudinary");
@@ -17,6 +17,7 @@ cloudinary.config({
   api_secret: process.env.CLOUDINARY_API_SECRET,
 });
 
+
 // config db
 mongoose
   .connect(process.env.MONGO_URI, {
@@ -24,7 +25,7 @@ mongoose
     useCreateIndex: true,
     useUnifiedTopology: true,
   })
-  .then(() => console.log("DB CONNECTED"))
+  .then((con) => console.log(`DB Connected with host : ${con.connection.host}`))
   .catch((err) => console.log("DB CONNECT ERROR", err));
 
 // Setting up config file

@@ -1,6 +1,7 @@
-require("dotenv").config();
+if(process.env.NODE_ENV !== 'PRODUCTION') require("dotenv").config();
 const express = require("express");
 const app = express();
+const path = require("path");
 
 const cookieParser = require("cookie-parser");
 const bodyparser = require("body-parser");
@@ -13,7 +14,8 @@ app.use(bodyparser.urlencoded({ extended: true }));
 app.use(cookieParser());
 app.use(fileUpload());
 
-
+// Braintree
+const braintree = require("./routes/braintree");
 
 // Import all routes
 const products = require("./routes/product");
@@ -21,13 +23,21 @@ const user = require("./routes/user");
 const order = require("./routes/order");
 const payment = require("./routes/payment");
 
-// app.get("/", (req, res) => {
-//   res.send("Hello");
-// });
 app.use("/api", products);
 app.use("/api", user);
 app.use("/api", order);
 app.use("/api", payment);
+
+if (process.env.NODE_ENV !== "PRODUCTION") {
+  app.use(express.static(path.join(__dirname, "./frontend/build")));
+
+  app.get("*", (req, res) => {
+    res.sendFile(path.resolve(__dirname, "./frontend/build/index.html"));
+  });
+}
+
+// Braintree
+app.use("/api", braintree);
 // Middleware to handle errors
 app.use(errorMiddleware);
 
