@@ -36,8 +36,6 @@ const server = app.listen(process.env.PORT, () => {
   );
 });
 
-
-
 // Handle Unhandled Promise Ejection
 process.on("unhandledRejection", (err) => {
   console.log(`ERROR: ${err.stack}`);
