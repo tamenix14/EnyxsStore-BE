@@ -1,4 +1,4 @@
-if(process.env.NODE_ENV !== 'PRODUCTION') require("dotenv").config();
+if (process.env.NODE_ENV !== "PRODUCTION") require("dotenv").config();
 const express = require("express");
 const app = express();
 const path = require("path");
@@ -29,7 +29,7 @@ app.use("/api", order);
 app.use("/api", payment);
 
 if (process.env.NODE_ENV !== "PRODUCTION") {
-  app.use(express.static(path.join(__dirname, "build")));
+  app.use(express.static(path.join(__dirname, '"build"')));
 
   app.get("*", (req, res) => {
     res.sendFile(path.resolve(__dirname, "build", "index.html"));
